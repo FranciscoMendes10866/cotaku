@@ -1,0 +1,45 @@
+datasource db {
+    provider = "postgresql"
+    url      = "postgresql://docker:docker@localhost:8296/cotaku"
+}
+
+generator db {
+    provider = "go run github.com/prisma/prisma-client-go"
+}
+
+model User {
+    id        String   @id @default(uuid())
+    email     String   @unique
+    password  String
+    username  String   @unique
+    is_online Boolean  @default(true)
+    is_admin  Boolean  @default(false)
+    Review    Review[]
+    Anime     Anime[]
+}
+
+model Anime {
+    id        String   @id @default(uuid())
+    profile   String   @unique
+    cover     String   @unique
+    name      String   @unique
+    synopsis  String
+    status    String   @default("Finished")
+    format    String   @default("TV")
+    duration  Int      @default(24)
+    season    String
+    source    String   @default("Manga")
+    gender    String
+    User      User     @relation(fields: [author_id], references: [id])
+    author_id String
+    Review    Review[]
+}
+
+model Review {
+    id       String @id @default(uuid())
+    content  String
+    Anime    Anime  @relation(fields: [anime_id], references: [id])
+    anime_id String
+    User     User   @relation(fields: [user_id], references: [id])
+    user_id  String
+}
