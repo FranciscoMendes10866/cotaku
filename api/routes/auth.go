@@ -11,5 +11,5 @@ func AuthRouter(app *fiber.App) {
 	api := app.Group("/api/auth")
 	api.Post("/sign_up", auth.SignUp)
 	api.Post("/sign_in", auth.SignIn)
-	api.Get("/sign_out", guards.Authorization(), auth.SignOut)
+	api.Patch("/sign_out", guards.Authorization(), auth.SignOut)
 }
