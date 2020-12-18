@@ -1,10 +1,18 @@
-import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { ChakraProvider } from "@chakra-ui/react"
+
+import { Home, SignIn } from './pages'
 
 const App = () => {
   return (
-    <div>
-      <h1>This will be the Cotaku web app 🍭 🌈 🌟</h1>
-    </div>
+    <ChakraProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/sign-in" component={SignIn} />
+        </Switch>
+      </Router>
+    </ChakraProvider>
   )
 }
 
