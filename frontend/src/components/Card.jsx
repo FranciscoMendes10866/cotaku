@@ -9,6 +9,7 @@ import {
     Flex,
     Badge
 } from "@chakra-ui/react"
+import { ModalDialog } from "."
 
 const Card = ({ anime }) => {
     return (
@@ -27,8 +28,10 @@ const Card = ({ anime }) => {
                         h={268}
                         borderRadius={8}
                         justifyContent="center"
+                        position="relative"
                     >
                         <Image w="full" borderRadius={8} src={anime.profile} />
+                        <ModalDialog anime={anime} />
                     </Box>
                     <Text
                         textAlign="left"
