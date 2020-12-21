@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { ChakraProvider } from "@chakra-ui/react"
 
-import { Home, SignIn } from './pages'
+import { Home, Panel, SignIn } from './pages'
 
 const App = () => {
   return (
@@ -10,6 +10,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/sign-in" component={SignIn} />
+          <Route path="/panel" component={Panel} />
         </Switch>
       </Router>
     </ChakraProvider>
