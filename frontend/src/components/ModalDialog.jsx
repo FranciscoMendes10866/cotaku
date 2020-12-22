@@ -10,17 +10,18 @@ import {
     Grid,
     GridItem,
     Image,
-    Flex,
     Box,
-    Stack,
     Container,
-    Badge,
-    Text
+    Text,
+    useColorModeValue
 } from "@chakra-ui/react"
 import { BsFillEyeFill } from 'react-icons/bs'
 
+import { AnimeDetails, Review, ReviewsModal } from '.'
+
 const ModalDialog = ({ anime }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const bgColor = useColorModeValue("gray.100", "gray.800")
     return (
         <>
             <Button
@@ -64,62 +65,28 @@ const ModalDialog = ({ anime }) => {
                                 </GridItem>
                                 <GridItem
                                     colSpan={2}
-                                    bg="gray.100"
+                                    bg={bgColor}
                                     borderRadius={8}
                                 >
-                                    <Flex
-                                        justifyContent="left"
-                                        align="left"
-                                        flexDirection="column"
-                                        pl={5}
-                                        py={5}
-                                    >
-                                        <Stack spacing={4}>
-                                            <Box>
-                                                Status:<br />
-                                                {anime.status === 'Airing' ? (
-                                                    <Badge
-                                                        bg="green.300"
-                                                        color="white"
-                                                    >
-                                                        Airing
-                                                    </Badge>
-                                                ) : (
-                                                        <Badge
-                                                            bg="orange.300"
-                                                            color="white"
-                                                        >
-                                                            Finished
-                                                        </Badge>
-                                                    )}
-                                            </Box>
-                                            <Box>
-                                                Format:<br />{anime.format}
-                                            </Box>
-                                            <Box>
-                                                Duration:<br />{anime.duration}
-                                            </Box>
-                                            <Box>
-                                                Season:<br />{anime.season}
-                                            </Box>
-                                            <Box>
-                                                Source:<br />{anime.source}
-                                            </Box>
-                                            <Box>
-                                                Gender:<br />{anime.gender}
-                                            </Box>
-                                        </Stack>
-                                    </Flex>
+                                    <AnimeDetails details={anime} />
                                 </GridItem>
                                 <GridItem colSpan={10}>
                                     <Box
                                         px={5}
                                         py={5}
                                         borderRadius={8}
-                                        bg="gray.100"
+                                        bg={bgColor}
                                     >
                                         <Text>{anime.synopsis}</Text>
                                     </Box>
+                                    <Review
+                                        animeId={anime.id}
+                                        bgColor={bgColor}
+                                    />
+                                    <ReviewsModal
+                                        reviews={anime.Review}
+                                        animeName={anime.name}
+                                    />
                                 </GridItem>
                             </Grid>
                         </Container>
