@@ -9,7 +9,7 @@ import {
 
 import { PopoverBodyDetail, CardInfo } from "."
 
-const Card = ({ anime, currentUserId }) => {
+const Card = ({ anime }) => {
     const bgColor = useColorModeValue("white", "gray.800")
     const fontColor = useColorModeValue("blue.500", "white")
     return (
@@ -20,10 +20,7 @@ const Card = ({ anime, currentUserId }) => {
         >
             <PopoverTrigger>
                 <Box>
-                    <CardInfo
-                        info={anime}
-                        currentUserId={currentUserId}
-                    />
+                    <CardInfo info={anime} />
                 </Box>
             </PopoverTrigger>
             <PopoverContent

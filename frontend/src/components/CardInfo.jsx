@@ -2,7 +2,7 @@ import { Box, Image, Text } from '@chakra-ui/react'
 
 import { ModalDialog } from '.'
 
-const CardInfo = ({ info, currentUserId }) => {
+const CardInfo = ({ info }) => {
     return (
         <>
             <Box
@@ -16,10 +16,7 @@ const CardInfo = ({ info, currentUserId }) => {
                 position="relative"
             >
                 <Image w="full" borderRadius={8} src={info.profile} />
-                <ModalDialog
-                    anime={info}
-                    currentUserId={currentUserId}
-                />
+                <ModalDialog anime={info} />
             </Box>
             <Text
                 textAlign="left"

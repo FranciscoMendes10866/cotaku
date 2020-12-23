@@ -12,7 +12,7 @@ import { FaCommentAlt } from 'react-icons/fa'
 
 import { ReviewDetail } from '.'
 
-const ReviewsModal = ({ reviews, animeName, currentUserId }) => {
+const ReviewsModal = ({ reviews, animeName }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
         <>
@@ -42,7 +42,6 @@ const ReviewsModal = ({ reviews, animeName, currentUserId }) => {
                                     return <ReviewDetail
                                         key={review.id}
                                         review={review}
-                                        currentUserId={currentUserId}
                                     />
                                 })}
                             </ModalBody>

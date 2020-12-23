@@ -2,8 +2,10 @@ import { Box, Flex, Avatar, Badge, Text, Button } from '@chakra-ui/react'
 import { RiDeleteBin7Line } from 'react-icons/ri'
 
 import { EditableReview } from '.'
+import { useStore } from '../store'
 
-const ReviewDetail = ({ review, currentUserId }) => {
+const ReviewDetail = ({ review }) => {
+    const currentUserId = useStore(state => state.currentUserId)
     return (
         <Box p="6" borderWidth="1px" borderRadius={8} mt={4} mb={4}>
             <Flex justifyContent="space-between">

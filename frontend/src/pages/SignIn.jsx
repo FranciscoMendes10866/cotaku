@@ -1,7 +1,37 @@
 import { Flex, Box, Input, Stack, Heading, Button } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { useState } from 'react'
+
+import { useStore } from '../store'
+import axios from '../utils/axios'
 
 const SignIn = () => {
+    const history = useHistory()
+    const { setToken, setUsername, setCurrentUserId } = useStore()
+    const [state, setState] = useState({
+        email: '',
+        password: ''
+    })
+    const handleOnChange = (e) => {
+        setState({ ...state, [e.target.id]: e.target.value })
+    }
+    const handleOnSubmit = async (e) => {
+        e.preventDefault()
+        await axios.post('auth/sign_in', state)
+            .then(({ data }) => {
+                if (data.token) {
+                    setToken(data.token)
+                    setUsername(data.username)
+                    setCurrentUserId(data.id)
+                    history.push('/panel')
+                }
+            })
+            .catch(err => console.log(err))
+        setState({
+            email: '',
+            password: ''
+        })
+    }
     return (
         <Flex>
             <Box
@@ -26,17 +56,28 @@ const SignIn = () => {
                         </Heading>
                         <Stack spacing={8} mt={12}>
                             <Input
+                                id="email"
+                                value={state.email}
+                                onChange={handleOnChange}
                                 variant="filled"
                                 placeholder="Email
                                 address"
                                 size="lg"
                             />
                             <Input
+                                id="password"
+                                value={state.password}
+                                onChange={handleOnChange}
                                 variant="filled"
                                 placeholder="Password"
                                 size="lg"
                             />
-                            <Button colorScheme="blue">Sign In</Button>
+                            <Button
+                                colorScheme="blue"
+                                onClick={handleOnSubmit}
+                            >
+                                Sign In
+                            </Button>
                             <Button
                                 as={Link}
                                 to="/"
@@ -54,7 +95,7 @@ const SignIn = () => {
                 height="100vh"
                 display={{ base: "none", md: "block" }}
                 backgroundRepeat="no-repeat"
-                background="url(https://i.pinimg.com/originals/67/0f/49/670f498d795fea0232874671cc479073.jpg)"
+                background="url(https://bit.ly/2WJchfX)"
                 backgroundSize="cover"
                 backgroundPosition="center"
                 position="relative"
