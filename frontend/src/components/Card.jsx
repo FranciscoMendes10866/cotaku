@@ -6,9 +6,10 @@ import {
     PopoverBody,
     useColorModeValue
 } from "@chakra-ui/react"
+
 import { PopoverBodyDetail, CardInfo } from "."
 
-const Card = ({ anime }) => {
+const Card = ({ anime, currentUserId }) => {
     const bgColor = useColorModeValue("white", "gray.800")
     const fontColor = useColorModeValue("blue.500", "white")
     return (
@@ -19,7 +20,10 @@ const Card = ({ anime }) => {
         >
             <PopoverTrigger>
                 <Box>
-                    <CardInfo info={anime} />
+                    <CardInfo
+                        info={anime}
+                        currentUserId={currentUserId}
+                    />
                 </Box>
             </PopoverTrigger>
             <PopoverContent
