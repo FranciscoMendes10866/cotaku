@@ -9,13 +9,14 @@ const Panel = () => {
     const stateToken = useStore(state => state.token)
     const {
         data,
+        isError,
         isLoading,
         isFetching
     } = useQuery(['animes', { token: stateToken }], FindHandler)
     return (
         <Container maxWidth="5xl">
             {isLoading || isFetching ? (
-                <LoadingData />
+                <LoadingData isError={isError} />
             ) : (
                     <SimpleGrid
                         columns={4}

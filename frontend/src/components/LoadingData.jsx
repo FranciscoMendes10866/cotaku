@@ -1,6 +1,6 @@
-import { CircularProgress, Flex, Box } from "@chakra-ui/react"
+import { CircularProgress, Flex, Box, Alert, AlertIcon } from "@chakra-ui/react"
 
-const LoadingData = () => {
+const LoadingData = ({ isError }) => {
     return (
         <Flex
             justifyContent="center"
@@ -8,7 +8,15 @@ const LoadingData = () => {
             h="100vh"
         >
             <Box>
-                <CircularProgress isIndeterminate color="blue.400" />
+                {isError ? (
+                    <Alert status="error">
+                        <AlertIcon />
+                            There was an error processing your request.
+                    </Alert>
+
+                ) : (
+                        <CircularProgress isIndeterminate color="blue.400" />
+                    )}
             </Box>
         </Flex>
     )
