@@ -11,7 +11,8 @@ const Panel = () => {
         data,
         isError,
         isLoading,
-        isFetching
+        isFetching,
+        refetch
     } = useQuery(['animes', { token: stateToken }], FindHandler)
     return (
         <Container maxWidth="5xl">
@@ -27,6 +28,7 @@ const Panel = () => {
                             return <Card
                                 key={anime.id}
                                 anime={anime}
+                                refetch={refetch}
                             />
                         })}
                     </SimpleGrid>

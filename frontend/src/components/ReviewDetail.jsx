@@ -1,11 +1,26 @@
 import { Box, Flex, Avatar, Badge, Text, Button } from '@chakra-ui/react'
 import { RiDeleteBin7Line } from 'react-icons/ri'
+import { useMutation } from 'react-query'
 
 import { EditableReview } from '.'
 import { useStore } from '../store'
+import { DeleteHandler } from '../handlers'
 
-const ReviewDetail = ({ review }) => {
+const ReviewDetail = ({ review, refetch }) => {
     const currentUserId = useStore(state => state.currentUserId)
+    const stateToken = useStore(state => state.token)
+    const { mutate } = useMutation(DeleteHandler, {
+        onSuccess: () => {
+            refetch()
+        }
+    })
+    const handleOnDelete = (e) => {
+        e.preventDefault()
+        mutate({
+            id: review.id,
+            token: stateToken
+        })
+    }
     return (
         <Box p="6" borderWidth="1px" borderRadius={8} mt={4} mb={4}>
             <Flex justifyContent="space-between">
@@ -34,6 +49,7 @@ const ReviewDetail = ({ review }) => {
                             variant="ghost"
                             size="sm"
                             colorScheme="pink"
+                            onClick={handleOnDelete}
                         >
                             <RiDeleteBin7Line />
                         </Button>

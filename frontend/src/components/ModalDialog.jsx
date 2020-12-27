@@ -19,7 +19,7 @@ import { BsFillEyeFill } from 'react-icons/bs'
 
 import { AnimeDetails, Review, ReviewsModal } from '.'
 
-const ModalDialog = ({ anime }) => {
+const ModalDialog = ({ anime, refetch }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const bgColor = useColorModeValue("gray.100", "gray.800")
     return (
@@ -82,10 +82,12 @@ const ModalDialog = ({ anime }) => {
                                     <Review
                                         animeId={anime.id}
                                         bgColor={bgColor}
+                                        refetch={refetch}
                                     />
                                     <ReviewsModal
                                         reviews={anime.Review}
                                         animeName={anime.name}
+                                        refetch={refetch}
                                     />
                                 </GridItem>
                             </Grid>

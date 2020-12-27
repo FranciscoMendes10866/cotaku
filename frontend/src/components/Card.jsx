@@ -9,7 +9,7 @@ import {
 
 import { PopoverBodyDetail, CardInfo } from "."
 
-const Card = ({ anime }) => {
+const Card = ({ anime, refetch }) => {
     const bgColor = useColorModeValue("white", "gray.800")
     const fontColor = useColorModeValue("blue.500", "white")
     return (
@@ -20,7 +20,10 @@ const Card = ({ anime }) => {
         >
             <PopoverTrigger>
                 <Box>
-                    <CardInfo info={anime} />
+                    <CardInfo
+                        info={anime}
+                        refetch={refetch}
+                    />
                 </Box>
             </PopoverTrigger>
             <PopoverContent

@@ -1,11 +1,21 @@
 import { Box, Textarea, Button, useColorModeValue } from '@chakra-ui/react'
 import { useState } from 'react'
+import { useMutation } from 'react-query'
 
-const Review = ({ animeId, bgColor }) => {
+import { useStore } from '../store'
+import { CreateHandler } from '../handlers'
+
+const Review = ({ animeId, bgColor, refetch }) => {
+    const stateToken = useStore(state => state.token)
     const textAreaBgColor = useColorModeValue("white", "gray.700")
     const textAreaFontColor = useColorModeValue("gray.500", "gray.200")
     const [state, setState] = useState({
         content: ''
+    })
+    const { mutate } = useMutation(CreateHandler, {
+        onSuccess: () => {
+            refetch()
+        }
     })
     const handleOnChange = (e) => {
         setState({
@@ -14,7 +24,14 @@ const Review = ({ animeId, bgColor }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(animeId)
+        mutate({
+            id: animeId,
+            body: state,
+            token: stateToken
+        })
+        setState({
+            content: ''
+        })
     }
     return (
         <Box
